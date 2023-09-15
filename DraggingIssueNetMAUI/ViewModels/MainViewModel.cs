@@ -17,6 +17,11 @@ namespace DraggingIssueNetMAUI.ViewModels
       this.InitializeItems();
     }
 
+    public void SetIsWindowVisibleToFalse()
+    {
+      this.IsWindowVisible = false;
+    }
+
     private void OnExitApplication()
     {
       Application.Current?.Quit();

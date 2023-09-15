@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Platform;
+﻿using DraggingIssueNetMAUI.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Platform;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 
@@ -33,6 +35,7 @@ public partial class App : MauiWinUIApplication
             if (args.DidPresenterChange && overlappedPresenter.State == OverlappedPresenterState.Minimized)
             {
               appWindow.Hide();
+              DraggingIssueNetMAUI.Services.ServiceProvider.GetService<IMainViewModel>()?.SetIsWindowVisibleToFalse();
               //Thread.Sleep(5000);
               //nativeWindow.Activate();
             }
