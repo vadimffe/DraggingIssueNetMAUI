@@ -58,6 +58,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Raw\trayicon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <COMReference Include="Microsoft.Office.Interop.Outlook">
 	    <WrapperTool>tlbimp</WrapperTool>
 	    <VersionMinor>6</VersionMinor>
@@ -70,6 +74,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="H.NotifyIcon.Maui" Version="2.0.117" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 

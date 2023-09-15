@@ -1,4 +1,5 @@
 ﻿using DraggingIssueNetMAUI.Models;
+using H.NotifyIcon;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -9,7 +10,37 @@ namespace DraggingIssueNetMAUI.ViewModels
     public MainViewModel()
     {
       this.CollectionItems = new ObservableCollection<DataModel>();
+
+      this.ShowHideWindowCommand = new Command(() => this.OnShowHideWindow());
+      this.ExitApplicationCommand = new Command(() => this.OnExitApplication());
+
       this.InitializeItems();
+    }
+
+    private void OnExitApplication()
+    {
+      Application.Current?.Quit();
+    }
+
+    private void OnShowHideWindow()
+    {
+      Window window = Application.Current?.MainPage?.Window;
+      if (window == null)
+      {
+        return;
+      }
+
+      if (this.IsWindowVisible)
+      {
+        window.Hide();
+        this.IsWindowVisible = false;
+      }
+      else
+      {
+        window.Show();
+        window.Activate();
+        this.IsWindowVisible = true;
+      }
     }
 
     private void InitializeItems()
@@ -28,6 +59,8 @@ namespace DraggingIssueNetMAUI.ViewModels
 
       //this.CollectionItems = new ObservableCollection<DataModel>(data);
     }
+
+    public bool IsWindowVisible { get; set; } = true;
 
     private string id;
     public string Id
@@ -61,5 +94,8 @@ namespace DraggingIssueNetMAUI.ViewModels
         this.OnPropertyChanged();
       }
     }
+
+    public ICommand ExitApplicationCommand { get; private set; }
+    public ICommand ShowHideWindowCommand { get; private set; }
   }
 }
